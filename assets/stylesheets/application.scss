@@ -1,0 +1,20 @@
+@import "cards";
+
+body {
+  font-family: Helvetica;
+}
+
+.flat-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flat {
+  flex: 50% 0 0;
+  cursor: pointer;
+  border: 6px solid transparent;
+}
+
+.flat.selected{
+  border: 6px red dashed;
+}
