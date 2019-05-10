@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { logger } from 'redux-logger';
+import reduxPromise from 'redux-promise';
 
 import '../assets/stylesheets/application.scss';
 
@@ -16,8 +18,11 @@ const reducers = combineReducers({
   selectedFlat: selectedFlatReducer
 });
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const middlewares = composeEnhancers(applyMiddleware(logger, reduxPromise));
+
 ReactDOM.render(
-  <Provider store={createStore(reducers)}>
+  <Provider store={createStore(reducers, {}, middlewares)}>
     <App />
   </Provider>,
   document.getElementById('root')
